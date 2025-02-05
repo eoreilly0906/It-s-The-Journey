@@ -22,7 +22,17 @@ model: string;
   // TODO: The types should be as follows: vin (string), color (string), make (string), model (string), year (number), weight (number), topSpeed (number), wheels (Wheel[]), towingCapacity (number)
 
   // TODO: Create a constructor that accepts the properties of the Truck class
-  constructor(vin: string, color: string, make: string, model: string, year: number, weight: number, topSpeed: number, wheels: Wheel[], towingCapacity: number) {
+  constructor (
+    vin: string,
+    color: string,
+    make: string,
+    model: string,
+    year: number,
+    weight: number,
+    topSpeed: number,
+    wheels: Wheel[],
+    towingCapacity: number
+  ) {
     super();
     this.vin = vin;
     this.color = color;
@@ -42,12 +52,20 @@ model: string;
       this.wheels = wheels;
     }
   }
+
+  // TODO: Implement the tow method from the AbleToTow interface
+   // TODO: Get the make an model of the vehicle if it exists
+    
+    // TODO: Check if the vehicle's weight is less than or equal to the truck's towing capacity
+
+    // TODO: If it is, log that the vehicle is being towed
+
+    // TODO: If it is not, log that the vehicle is too heavy to be towed
   tow(vehicle: Truck | Motorbike | Car): void {
     const vehicleDetails = 'make' in vehicle && 'model' in vehicle 
       ? `${vehicle.make} ${vehicle.model}`
       : 'Vehicle';
     
-    // Type assertion since we know all vehicles extend Vehicle class which has weight
     const vehicleWeight = (vehicle as Vehicle).weight;
     
     if (vehicleWeight <= this.towingCapacity) {
@@ -56,27 +74,9 @@ model: string;
       console.log(`${vehicleDetails} is too heavy to be towed`);
     }
   }
-    
 
-  // TODO: Implement the tow method from the AbleToTow interface
-
-     // TODO: Get the make an model of the vehicle if it exists
-    
-
-
-    // TODO: Check if the vehicle's weight is less than or equal to the truck's towing capacity
-
-    // TODO: If it is, log that the vehicle is being towed
-
-    // TODO: If it is not, log that the vehicle is too heavy to be towed
-
-  }
-
-  // TODO: Override the printDetails method from the Vehicle class
-  override printDetails(): void {
+  override printDetails() {
     super.printDetails();
-    // TODO: The method should log the details of the Truck
-    
     console.log(`VIN: ${this.vin}`);
     console.log(`Make: ${this.make}`);
     console.log(`Model: ${this.model}`);
@@ -87,13 +87,8 @@ model: string;
     console.log(`Towing Capacity: ${this.towingCapacity} lbs`);
     console.log(`Wheels: ${this.wheels}`);
   }
-   
-   
-
-    // TODO: The details should include the VIN, make, model, year, weight, top speed, color, towing capacity, and wheels
-
+}
 
 // Export the Truck class as the default export
 export default Truck;
-
 
