@@ -10,7 +10,7 @@ class Car extends Vehicle {
   make: string;
   model: string;
   year: number;
-  weight: number;
+  override weight: number;
   topSpeed: number;
   wheels: Wheel[];
 
