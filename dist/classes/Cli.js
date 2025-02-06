@@ -2,6 +2,7 @@
 import inquirer from "inquirer";
 import Truck from "./Truck.js";
 import Car from "./Car.js";
+import Motorbike from "./Motorbike.js";
 // define the Cli class
 class Cli {
     // TODO: Update the constructor to accept Truck and Motorbike objects as well
@@ -201,34 +202,39 @@ class Cli {
             {
                 type: 'input',
                 name: 'frontWheelDiameter',
-                message: 'Enter Front Wheel Diameter',
+                message: 'Enter Front Wheel 1 Diameter',
             },
             {
                 type: 'input',
                 name: 'frontWheelBrand',
-                message: 'Enter Front Wheel Brand',
+                message: 'Enter Front Wheel 1 Brand',
             },
             {
                 type: 'input',
                 name: 'rearWheelDiameter',
-                message: 'Enter Rear Wheel Diameter',
+                message: 'Enter Rear Wheel 2 Diameter',
             },
             {
                 type: 'input',
                 name: 'rearWheelBrand',
-                message: 'Enter Rear Wheel Brand',
+                message: 'Enter Rear Wheel 2 Brand',
             },
         ])
             .then((answers) => {
-            // TODO: Use the answers object to pass the required properties to the Motorbike constructor
+            const motorbike = new Motorbike(
+            // TODO: The generateVin method is static and should be called using the class name Cli, make sure to use Cli.generateVin() for creating a truck and motorbike as well!
+            Cli.generateVin(), answers.color, answers.make, answers.model, parseInt(answers.year), parseInt(answers.weight), parseInt(answers.topSpeed), []);
             // TODO: push the motorbike to the vehicles array
+            this.vehicles.push(motorbike);
             // TODO: set the selectedVehicleVin to the vin of the motorbike
+            this.selectedVehicleVin = motorbike.vin;
             // TODO: perform actions on the motorbike
+            this.performActions();
         });
     }
     // method to find a vehicle to tow
     // TODO: add a parameter to accept a truck object
-    findVehicleToTow() {
+    findVehicleToTow(truck) {
         inquirer
             .prompt([
             {
@@ -245,6 +251,12 @@ class Cli {
         ])
             .then((answers) => {
             // TODO: check if the selected vehicle is the truck
+            if (answers.vehicleToTow instanceof Truck) {
+                console.log('Truck cannot tow itself');
+            }
+            else {
+                console.log('Truck can tow the selected vehicle');
+            }
             // TODO: if it is, log that the truck cannot tow itself then perform actions on the truck to allow the user to select another action
             // TODO: if it is not, tow the selected vehicle then perform actions on the truck to allow the user to select another action
         });
