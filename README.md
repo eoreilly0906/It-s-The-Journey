@@ -38,8 +38,10 @@ https://www.typescriptlang.org/docs/handbook/2/objects.html
 https://www.typescriptlang.org/docs/handbook/2/everyday-types.html
 https://www.typescriptlang.org/docs/handbook/2/functions.html
 
+Worked with classmates and TA's to get the code working
 
 Used starter code given with the project to start
+
 
 Inquirer package:
 https://www.npmjs.com/package/inquirer

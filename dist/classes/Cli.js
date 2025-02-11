@@ -3,9 +3,10 @@ import inquirer from "inquirer";
 import Truck from "./Truck.js";
 import Car from "./Car.js";
 import Motorbike from "./Motorbike.js";
+import Wheel from "./Wheel.js";
 // define the Cli class
 class Cli {
-    // TODO: Update the constructor to accept Truck and Motorbike objects as well
+    // constructor for the Cli class
     constructor(vehicles) {
         this.exit = false;
         this.vehicles = vehicles;
@@ -47,7 +48,7 @@ class Cli {
                 type: 'list',
                 name: 'vehicleType',
                 message: 'Select a vehicle type',
-                // TODO: Update the choices array to include Truck and Motorbike
+                // declare the choices for the vehicle type
                 choices: ['Car', 'Truck', 'Motorbike'],
             },
         ])
@@ -103,7 +104,7 @@ class Cli {
         ])
             .then((answers) => {
             const car = new Car(
-            // TODO: The generateVin method is static and should be called using the class name Cli, make sure to use Cli.generateVin() for creating a truck and motorbike as well!
+            // generate a vin
             Cli.generateVin(), answers.color, answers.make, answers.model, parseInt(answers.year), parseInt(answers.weight), parseInt(answers.topSpeed), []);
             // push the car to the vehicles array
             this.vehicles.push(car);
@@ -155,7 +156,7 @@ class Cli {
         ])
             .then((answers) => {
             const truck = new Truck(
-            // TODO: The generateVin method is static and should be called using the class name Cli, make sure to use Cli.generateVin() for creating a truck and motorbike as well!
+            // generate a vin
             Cli.generateVin(), answers.color, answers.make, answers.model, parseInt(answers.year), parseInt(answers.weight), parseInt(answers.topSpeed), [], parseInt(answers.towingCapacity));
             // push the truck to the vehicles array
             this.vehicles.push(truck);
@@ -221,14 +222,16 @@ class Cli {
             },
         ])
             .then((answers) => {
-            const motorbike = new Motorbike(
-            // TODO: The generateVin method is static and should be called using the class name Cli, make sure to use Cli.generateVin() for creating a truck and motorbike as well!
-            Cli.generateVin(), answers.color, answers.make, answers.model, parseInt(answers.year), parseInt(answers.weight), parseInt(answers.topSpeed), []);
-            // TODO: push the motorbike to the vehicles array
+            const wheels = [
+                new Wheel(parseInt(answers.frontWheelDiameter), answers.frontWheelBrand),
+                new Wheel(parseInt(answers.rearWheelDiameter), answers.rearWheelBrand)
+            ];
+            const motorbike = new Motorbike(Cli.generateVin(), answers.color, answers.make, answers.model, parseInt(answers.year), parseInt(answers.weight), parseInt(answers.topSpeed), wheels);
+            // push the motorbike to the vehicles array
             this.vehicles.push(motorbike);
-            // TODO: set the selectedVehicleVin to the vin of the motorbike
+            // set the selectedVehicleVin to the vin of the motorbike
             this.selectedVehicleVin = motorbike.vin;
-            // TODO: perform actions on the motorbike
+            // perform actions on the motorbike
             this.performActions();
         });
     }
@@ -254,7 +257,6 @@ class Cli {
             const vehicleToTow = this.vehicles.find(v => v.vin === answers.vehicleToTowVin);
             if (vehicleToTow) {
                 truck.tow(vehicleToTow);
-                //console.log(`Successfully towing ${vehicleToTow.make} ${vehicleToTow.model}`);
             }
             this.performActions();
         });
