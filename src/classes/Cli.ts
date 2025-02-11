@@ -304,27 +304,41 @@ class Cli {
 
   // method to perform actions on a vehicle
   performActions(): void {
+    // Find the selected vehicle
+    const selectedVehicle = this.vehicles.find(
+      vehicle => vehicle.vin === this.selectedVehicleVin
+    );
+
+    // Base choices available for all vehicles
+    const baseChoices = [
+      'Print details',
+      'Start vehicle',
+      'Accelerate 5 MPH',
+      'Decelerate 5 MPH',
+      'Stop vehicle',
+      'Turn right',
+      'Turn left',
+      'Reverse',
+      'Select or create another vehicle',
+      'Exit'
+    ];
+
+    // Add specific choices based on vehicle type
+    const choices = [...baseChoices];
+    if (selectedVehicle instanceof Truck) {
+      choices.push('Tow vehicle');
+    }
+    if (selectedVehicle instanceof Motorbike) {
+      choices.push('Wheelie');
+    }
+
     inquirer
       .prompt([
         {
           type: 'list',
           name: 'action',
           message: 'Select an action',
-          // TODO: add options to tow and wheelie
-          choices: [
-            'Print details',
-            'Start vehicle',
-            'Accelerate 5 MPH',
-            'Decelerate 5 MPH',
-            'Stop vehicle',
-            'Turn right',
-            'Turn left',
-            'Reverse',
-            'Select or create another vehicle',
-            'Exit',
-            'Wheelie',
-            'Tow vehicle',
-          ],
+          choices: choices,
         },
       ])
       .then((answers) => {
@@ -398,7 +412,9 @@ class Cli {
         else if (answers.action === 'Wheelie') {
           for (let i = 0; i < this.vehicles.length; i++) {
             if (this.vehicles[i].vin === this.selectedVehicleVin) {
-              this.vehicles[i].wheelie();
+              if (this.vehicles[i] instanceof Motorbike) {
+                (this.vehicles[i] as Motorbike).wheelie();
+              }
             }
           }
         }
