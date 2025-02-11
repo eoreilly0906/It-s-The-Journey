@@ -34,12 +34,21 @@ And LOTS of googling.
 ## Notes on code
 General knowledge of how the code is working
 https://www.typescriptlang.org/docs/handbook/2/classes.html
+https://www.typescriptlang.org/docs/handbook/2/objects.html
+https://www.typescriptlang.org/docs/handbook/2/everyday-types.html
+https://www.typescriptlang.org/docs/handbook/2/functions.html
+
+
+Used starter code given with the project to start
+
+Inquirer package:
+https://www.npmjs.com/package/inquirer
 
 
 README template	 for project:
 https://github.com/alec-chernicki/portfolio-template/blob/master/README.md
 
 
-
 Help with errors and trouble shooting:
 https://www.google.com/
+https://stackoverflow.com/questions
