@@ -13,6 +13,10 @@ class Wheel {
     get getTireBrand() {
         return this.tireBrand;
     }
+    // Add toString method to properly display wheel information
+    toString() {
+        return `${this.diameter}" ${this.tireBrand} wheel`;
+    }
 }
 // Export the Wheel class
 export default Wheel;
